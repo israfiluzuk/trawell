@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "479581480299",
+    "firebase_url": "https://dbtrawell.firebaseio.com",
+    "project_id": "dbtrawell",
+    "storage_bucket": "dbtrawell.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479581480299:android:dd6e808bfb2e1718",
+        "android_client_info": {
+          "package_name": "com.example.trawell"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "479581480299-ad25pl4q8iml0mreqt4md657muc7i646.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trawell",
+            "certificate_hash": "fe9248436f603c3ff2c01fb64f499199e7877af9"
+          }
+        },
+        {
+          "client_id": "479581480299-9iarm838k6ep86jtpdhsqk31u18077ah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyb5YE8xGtW2qsj-Mfrt_X_zbnpIVcItQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "479581480299-9iarm838k6ep86jtpdhsqk31u18077ah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
