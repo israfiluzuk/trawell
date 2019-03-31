@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/WhiteBAck"
     tools:context=".KullaniciKayit">
+
 
     <EditText
         android:id="@+id/txtKayitAd"
@@ -55,14 +56,17 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/textbox_xml"
         android:hint="Şifreniz..."
         android:inputType="textPassword"
         android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.007" />
 
 
     <EditText
@@ -98,7 +102,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/background_button"
         android:text="Kayıt Ol"
-        android:textColor="@color/colorButtonGiris"
+        android:textColor="@color/colorWhite"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -144,22 +148,24 @@
         app:layout_constraintBottom_toBottomOf="@+id/btnKayitYap"
         app:layout_constraintEnd_toEndOf="@+id/btnKayitYap"
         app:layout_constraintStart_toStartOf="@+id/btnKayitYap"
-        app:layout_constraintTop_toTopOf="@+id/btnKayitYap"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintTop_toTopOf="@+id/btnKayitYap" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ImgUserPhoto"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:srcCompat="@drawable/user" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/userphoto" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"

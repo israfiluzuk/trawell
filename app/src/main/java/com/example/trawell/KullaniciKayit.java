@@ -1,11 +1,16 @@
 package com.example.trawell;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,10 +35,13 @@ public class KullaniciKayit extends AppCompatActivity {
     static int PReqCode = 1;
     static int REQUESTCODE = 1;
     Uri pickedImgUri;
-   private  EditText userMail, userPassword, userPassword2, userName;
-   private ProgressBar progressBar;
-   private Button regBtn;
-   private FirebaseAuth firebaseAuth;
+
+    private  EditText userMail, userPassword, userPassword2, userName;
+    private ProgressBar progressBar;
+    private Button regBtn;
+
+
+    private FirebaseAuth firebaseAuth;
 
 
 
@@ -55,30 +63,94 @@ public class KullaniciKayit extends AppCompatActivity {
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 regBtn.setVisibility(View.INVISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
+                regBtn.setVisibility(View.VISIBLE);
+
                 final String email = userMail.getText().toString();
                 final String password = userPassword.getText().toString();
                 final String password2 = userPassword2.getText().toString();
                 final String name = userName.getText().toString();
 
-                if (email.isEmpty() || name.isEmpty()|| password.isEmpty()|| password2.isEmpty()|| !password.equals(password2))
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplicationContext(), "Mail adresinizi giriniz.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                {
-                    //Ekrana yazılacak Uyarı
-                   showMessage("Lütfen bilgilerinizi tekrar konrol ediniz.");
-                   regBtn.setVisibility(View.VISIBLE);
-                   progressBar.setVisibility(View.INVISIBLE);
+                if (TextUtils.isEmpty(password)) {
+                    Toast.makeText(getApplicationContext(), "Şifrenizi giriniz", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(password2)) {
+                    Toast.makeText(getApplicationContext(), "Şifrenizi tekrar giriniz", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (password.length() < 6) {
+                    Toast.makeText(getApplicationContext(), "Şifreniz çok kısa en az 6 karakter olmalıdır.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 else{
                     CreateUserAccount(email,name,password);
-                    
+
                 }
             }
         });
 
 
+        ImgUserPhoto = findViewById(R.id.ImgUserPhoto) ;
 
+        ImgUserPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (Build.VERSION.SDK_INT >= 22) {
+
+                    checkAndRequestForPermission();
+
+
+                }
+                else
+                {
+                    openGallery();
+                }
+
+
+
+
+
+            }
+        });
+
+
+
+    }
+
+
+    private void checkAndRequestForPermission() {
+
+
+        if (ContextCompat.checkSelfPermission(KullaniciKayit.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(KullaniciKayit.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                Toast.makeText(KullaniciKayit.this,"Lütfen erişim için izinleri kabul ediniz.",Toast.LENGTH_SHORT).show();
+
+            }
+
+            else
+            {
+                ActivityCompat.requestPermissions(KullaniciKayit.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        PReqCode);
+            }
+
+        }
+        else
+            openGallery();
 
     }
 
@@ -92,7 +164,7 @@ public class KullaniciKayit extends AppCompatActivity {
                             //Kullanıcı oluşturuldu
                             showMessage("Kullanıcı Oluşturuldu");
                             updateUserInfo(name, pickedImgUri,firebaseAuth.getCurrentUser());
-                            finish();
+
 
                         }
                         else
@@ -123,6 +195,7 @@ public class KullaniciKayit extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
 
+
                         UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
                                 .setDisplayName(name)
                                 .setPhotoUri(uri)
@@ -132,10 +205,17 @@ public class KullaniciKayit extends AppCompatActivity {
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()){
-                                            showMessage("Kayıt Tamamlandı");
+                                        if (!task.isSuccessful()) {
+                                            Toast.makeText(KullaniciKayit.this, "Kayıt başarısız. Bilgilerinizi kontrol edip tekrar deneyiniz." + task.getException(),
+                                                    Toast.LENGTH_SHORT).show();
                                             updateUI();
+                                        } else {
+                                            Toast.makeText(KullaniciKayit.this, "Kayıt başarılı.", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(KullaniciKayit.this, MainActivity.class));
+
+
                                         }
+
                                     }
                                 });
                     }
@@ -161,8 +241,42 @@ public class KullaniciKayit extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBar.setVisibility(View.GONE);
+    }
+
+
     public void LinkHesap(View view) {
         Intent LinkHesap = new Intent(getApplicationContext(), KullaniciGiris.class );
         startActivity(LinkHesap);
+    }
+
+
+    private void openGallery() {
+
+
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent,REQUESTCODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == REQUESTCODE && data != null ) {
+
+            // the user has successfully picked an image
+            // we need to save its reference to a Uri variable
+            pickedImgUri = data.getData() ;
+            ImgUserPhoto.setImageURI(pickedImgUri);
+
+
+        }
+
+
     }
 }

@@ -61,6 +61,7 @@ public class KullaniciGiris extends AppCompatActivity {
         btnReset = (Button) findViewById(R.id.btnSifreUnuttum);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        loginProgress.setVisibility(View.INVISIBLE);
 
 
         btnReset.setOnClickListener(new View.OnClickListener() {

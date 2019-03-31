@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     public void KayitGo(View view){
         Intent kayitPage = new Intent(getApplicationContext(),KullaniciKayit.class);
         startActivity(kayitPage);
-        finish();
+
     }
 
     public void ClickHakkimizda(View view) {

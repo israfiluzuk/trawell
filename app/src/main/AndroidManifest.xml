@@ -11,10 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Anasayfa"></activity>
+        <activity android:name=".KullaniciKayit"></activity>
+        <activity android:name=".Anasayfa" />
         <activity android:name=".Hakkimizda" />
         <activity android:name=".SurumNotlari" />
-        <activity android:name=".KullaniciKayit" />
         <activity android:name=".SifremiUnuttum" />
         <activity android:name=".KullaniciGiris" />
         <activity android:name=".MainActivity">
