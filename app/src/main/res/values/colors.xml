@@ -7,5 +7,7 @@
     <color name="colorAcikGri">#F6F5F5</color>
     <color name="colorWhite">#F6F5F5</color>
     <color name="WhiteBAck">#FFFFFF</color>
+    <color name="colorTextSubtitle">#4e4e4e</color>
+    <color name="colorTextTitle">#262626</color>
 
 </resources>

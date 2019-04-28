@@ -104,7 +104,7 @@ public class KullaniciGiris extends AppCompatActivity {
                                     }
                                 }
                                 else{
-                                    Intent intent = new Intent(KullaniciGiris.this, MainActivity.class);
+                                    Intent intent = new Intent(KullaniciGiris.this, Anasayfa.class);
                                     startActivity(intent);
                                     finish();
                                 }

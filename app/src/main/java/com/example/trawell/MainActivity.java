@@ -35,4 +35,10 @@ public class MainActivity extends AppCompatActivity {
         Intent SurumGo = new Intent(getApplicationContext(), SurumNotlari.class );
         startActivity(SurumGo);
     }
+
+    public void geciciGiris(View view) {
+        Intent giris = new Intent(getApplicationContext(),Anasayfa.class);
+        startActivity(giris);
+
+    }
 }

@@ -17,4 +17,11 @@ public class SurumNotlari extends AppCompatActivity {
         Intent Surum = new Intent(getApplicationContext(), MainActivity.class );
         startActivity(Surum);
     }
+
+    public void haberekle(View view) {
+
+        Intent haberekle = new Intent(getApplicationContext(),HaberGiris.class);
+        startActivity(haberekle);
+
+    }
 }

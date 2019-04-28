@@ -120,6 +120,24 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
+    <Button
+        android:id="@+id/btnGecici"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="geciciGiris"
+        android:text="Geçici Giriş Butonu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnKayit" />
+
     //Logo
 
 </android.support.constraint.ConstraintLayout>
