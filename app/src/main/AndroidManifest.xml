@@ -31,23 +31,37 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".YakindaNelerVar"
             android:label="@string/title_activity_yakinda_neler_var"></activity>
-        <activity android:name=".HaberGiris" />
-        <activity android:name=".HaberDetay" />
-        <activity android:name=".Search" />
-        <activity android:name=".News" />
-        <activity android:name=".Camera" />
+        <activity android:name=".HaberGiris"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HaberDetay"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Search"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".News"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Camera"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Anasayfa"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_anasayfa"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".KullaniciKayit" />
-        <activity android:name=".Hakkimizda" />
-        <activity android:name=".SurumNotlari" />
-        <activity android:name=".SifremiUnuttum" />
-        <activity android:name=".KullaniciGiris" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".KullaniciKayit"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Hakkimizda"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SurumNotlari"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SifremiUnuttum"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".KullaniciGiris"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

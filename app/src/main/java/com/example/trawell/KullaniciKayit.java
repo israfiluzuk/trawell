@@ -1,10 +1,13 @@
 package com.example.trawell;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -19,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,22 +30,31 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
+import java.util.UUID;
 
 public class KullaniciKayit extends AppCompatActivity {
 
     ImageView ImgUserPhoto;
     static int PReqCode = 1;
-    static int REQUESTCODE = 1;
+    private final int REQUESTCODE = 71;
     Uri pickedImgUri;
 
     private  EditText userMail, userPassword, userPassword2, userName;
     private ProgressBar progressBar;
-    private Button regBtn;
+    private Button regBtn, btnChooseImg;
+    private Button btnRegImg;
 
 
     private FirebaseAuth firebaseAuth;
+    FirebaseStorage storage;
+    StorageReference storageReference;
+
+
 
 
 
@@ -50,6 +63,7 @@ public class KullaniciKayit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kullanici_kayit);
 
+        btnChooseImg = findViewById(R.id.btnChooseImg);
         userName = findViewById(R.id.txtKayitAd);
         userMail = findViewById(R.id.txtKayitMail);
         userPassword = findViewById(R.id.txtKayitSifre);
@@ -58,11 +72,24 @@ public class KullaniciKayit extends AppCompatActivity {
         regBtn = findViewById(R.id.btnKayitYap);
         progressBar.setVisibility(View.INVISIBLE);
 
+
         firebaseAuth = FirebaseAuth.getInstance();
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+        btnChooseImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGallery();
+            }
+        });
 
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
 
 
                 regBtn.setVisibility(View.INVISIBLE);
@@ -74,6 +101,8 @@ public class KullaniciKayit extends AppCompatActivity {
                 final String password = userPassword.getText().toString();
                 final String password2 = userPassword2.getText().toString();
                 final String name = userName.getText().toString();
+
+
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Mail adresinizi giriniz.", Toast.LENGTH_SHORT).show();
@@ -96,18 +125,19 @@ public class KullaniciKayit extends AppCompatActivity {
                 else{
                     CreateUserAccount(email,name,password);
 
+                    uploadImage();
                 }
             }
         });
 
 
-        ImgUserPhoto = findViewById(R.id.ImgUserPhoto) ;
+        ImgUserPhoto = findViewById(R.id.regUserPhoto) ;
 
         ImgUserPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (Build.VERSION.SDK_INT >= 22) {
+                /*if (Build.VERSION.SDK_INT >= 22) {
 
                     checkAndRequestForPermission();
 
@@ -116,11 +146,8 @@ public class KullaniciKayit extends AppCompatActivity {
                 else
                 {
                     openGallery();
-                }
-
-
-
-
+                }*/
+                uploadImage();
 
             }
         });
@@ -130,7 +157,7 @@ public class KullaniciKayit extends AppCompatActivity {
     }
 
 
-    private void checkAndRequestForPermission() {
+    /*private void checkAndRequestForPermission() {
 
 
         if (ContextCompat.checkSelfPermission(KullaniciKayit.this, Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -152,7 +179,7 @@ public class KullaniciKayit extends AppCompatActivity {
         else
             openGallery();
 
-    }
+    }*/
 
     private void CreateUserAccount(String email, final String name, String password) {
 
@@ -181,6 +208,49 @@ public class KullaniciKayit extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+    private void uploadImage(){
+        if (pickedImgUri !=null){
+
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Yükleniyor...");
+            progressDialog.show();
+
+            StorageReference reference = storageReference.child("images/"+ UUID.randomUUID().toString());
+            reference.putFile(pickedImgUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(KullaniciKayit.this,"Yüklendi", Toast.LENGTH_SHORT).show();
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(KullaniciKayit.this,"Yüklenemedi"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                            progressDialog.setMessage("Yüklendi"+ (int)progress+"%");
+
+
+                        }
+                    });
+
+        }
+    }
+
+
 
 
     private void updateUserInfo(final String name, Uri pickedImgUri, final FirebaseUser currentUser){
@@ -229,7 +299,6 @@ public class KullaniciKayit extends AppCompatActivity {
 
         Intent home_Activity = new Intent(getApplicationContext(), Anasayfa.class);
         startActivity(home_Activity);
-        finish();
 
     }
 
@@ -260,17 +329,26 @@ public class KullaniciKayit extends AppCompatActivity {
 
         Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent,REQUESTCODE);
+        startActivityForResult(galleryIntent.createChooser(galleryIntent,"Bir Resim Seçiniz"), REQUESTCODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && requestCode == REQUESTCODE && data != null ) {
+        if (resultCode == RESULT_OK && requestCode == REQUESTCODE && data != null && data.getData() !=null ) {
 
-            // the user has successfully picked an image
-            // we need to save its reference to a Uri variable
+            // kullanıcı resim seçmiş ise
+            pickedImgUri = data.getData();
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),pickedImgUri);
+                ImgUserPhoto.setImageBitmap(bitmap);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
             pickedImgUri = data.getData() ;
             ImgUserPhoto.setImageURI(pickedImgUri);
 
