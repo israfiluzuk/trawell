@@ -3,27 +3,32 @@ package com.example.trawell;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.trawell.Haber.HaberDB;
+import com.example.trawell.Haber.NewsAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 
 public class News extends AppCompatActivity {
 
-    TextView twBaslik;
-    Button btnListle;
+    DatabaseReference reference;
+    RecyclerView recyclerView;
+    ArrayList<HaberDB> list;
+    NewsAdapter nAdapter;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference oku = FirebaseDatabase.getInstance().getReference().child("news");
 
 
     @Override
@@ -31,32 +36,29 @@ public class News extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-        twBaslik = (TextView) findViewById(R.id.twBaslik);
-        btnListle = (Button) findViewById(R.id.btnListele);
 
-        btnListle.setOnClickListener(new View.OnClickListener() {
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        list = new ArrayList<HaberDB>();
+
+        reference=FirebaseDatabase.getInstance().getReference().child("news");
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                    HaberDB haberDB = dataSnapshot1.getValue(HaberDB.class);
+                    list.add(haberDB);
 
-
-                ValueEventListener dinle = new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        HaberDB hdb = new HaberDB();
-                        hdb = dataSnapshot.getValue(HaberDB.class);
-                        twBaslik.setText(hdb.baslik);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                };
-
-                oku.addValueEventListener(dinle);
+                }
+                nAdapter = new NewsAdapter(News.this, list);
+                recyclerView.setAdapter(nAdapter);
             }
 
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(News.this, "Bir şeyler yanlış gitti...", Toast.LENGTH_SHORT).show();
+            }
         });
 
     }

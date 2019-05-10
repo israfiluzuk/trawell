@@ -15,19 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "479581480299-ad25pl4q8iml0mreqt4md657muc7i646.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.trawell",
-            "certificate_hash": "fe9248436f603c3ff2c01fb64f499199e7877af9"
-          }
-        },
-        {
           "client_id": "479581480299-nnuh41r18rkpjjqp64vfivsbves98smh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.trawell",
             "certificate_hash": "c6f48a57f2749160602695e3f79a4158306618cc"
+          }
+        },
+        {
+          "client_id": "479581480299-ad25pl4q8iml0mreqt4md657muc7i646.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trawell",
+            "certificate_hash": "fe9248436f603c3ff2c01fb64f499199e7877af9"
           }
         },
         {
