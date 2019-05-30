@@ -1,9 +1,11 @@
-package com.example.trawell;
+package com.example.trawell.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.trawell.R;
 
 public class SurumNotlari extends AppCompatActivity {
 

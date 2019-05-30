@@ -38,13 +38,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         newsViewHolder.title.setText(haberDBS.get(position).getTitle());
         newsViewHolder.publishedAt.setText(haberDBS.get(position).getPublishedAt());
         newsViewHolder.source.setText(haberDBS.get(position).getSource());
-        newsViewHolder.time.setText(haberDBS.get(position).getDesc());
+        newsViewHolder.time.setText(haberDBS.get(position).getTime());
         Picasso.get().load(haberDBS.get(position).getImg()).into(newsViewHolder.img);
 
     }
 
     @Override
     public int getItemCount() {
+
         return haberDBS.size();
     }
 

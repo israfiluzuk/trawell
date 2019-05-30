@@ -2,12 +2,16 @@
 <resources>
     <color name="colorPrimary">#048998</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#E74C3C</color>
     <color name="colorButtonGiris">#3BB4C1</color>
     <color name="colorAcikGri">#F6F5F5</color>
     <color name="colorWhite">#F6F5F5</color>
     <color name="WhiteBAck">#FFFFFF</color>
     <color name="colorTextSubtitle">#4e4e4e</color>
     <color name="colorTextTitle">#262626</color>
+    <color name="grey">#b4b4b4</color>
+    <color name="headings">#000</color>
+    <color name="followersBg">#3BB4C1</color>
+    <color name="graySecond">#e9e4e6</color>
 
 </resources>

@@ -7,6 +7,18 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_yakinda_neler_var">Map</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="title_activity_yakinda_neler_var">Harita</string>
+
+    <string name="contact_form">Bizimle İletişime Geç</string>
+    <string name="contact_form_name">Ad</string>
+    <string name="contact_form_email">Mail</string>
+    <string name="contact_form_subject">Konu</string>
+    <string name="contact_form_message">Mesaj</string>
+    <string name="contact_form_button">Gönder</string>
+    <string name="contact_form_post_message">Lütfen Bekleyin! Destek departmanımıza mesajınızı gönderiyoruz...</string>
+    <string name="contact_posted">Mesajınız başarılı bir şekilde iletilmiştir.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Boş Fragment</string>
 </resources>

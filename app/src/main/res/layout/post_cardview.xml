@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="362dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/shareframe"
+                android:layout_width="391dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/shadow_bottom"
+                android:layout_alignLeft="@+id/shadow_bottom"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="260dp"
+                android:layout_marginRight="14dp">
+
+
+
+
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/shadow_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_alignBottom="@id/heritage_img"
+                android:src="@drawable/bottom_shadow" />
+
+            <ProgressBar
+                android:id="@+id/progress_load_photo"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+
+                />
+
+            <TextView
+                android:id="@+id/yTarihi"
+                android:layout_width="91dp"
+                android:layout_height="30dp"
+                android:layout_alignTop="@+id/layoutDate"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_toStartOf="@+id/layoutDate"
+                android:layout_toLeftOf="@+id/layoutDate"
+                android:drawablePadding="10dp"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="Yapıldığı Tarih"
+                android:textColor="@android:color/white" />
+
+            <FrameLayout
+                android:id="@+id/layoutDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/heritage_img"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="-50dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_white"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/heritage_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginRight="10dp"
+                    android:text="17 Temmuz 1997"
+                    android:textColor="#606060"  />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_date" />
+
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/heritage_img"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:transitionName="img"
+                tools:ignore="UnusedAttribute" />
+
+
+            <TextView
+                android:id="@+id/heritage_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/heritage_img"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/contact_form_name"
+                android:textColor="@color/colorTextTitle"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/heritage_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/heritage_name"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="16dp"
+                android:text="Desc" />
+
+            <LinearLayout
+                android:id="@+id/likedislikecomment"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="260dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imgBtnLike"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/unliked" />
+                <TextView
+                    android:id="@+id/txtLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:text="0"/>
+                <ImageButton
+                    android:id="@+id/imgBtnDislike"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="5dp"
+
+                    android:background="@drawable/undislike" />
+                <TextView
+                    android:id="@+id/txtDislike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:text="0"/>
+
+                <ImageButton
+                    android:id="@+id/imgBtnAdd"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/add" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtAdd"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:text="0"/>
+
+                <ImageButton
+                    android:id="@+id/imgBtnComment"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignTop="@+id/likedislikecomment"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/comment"
+                    android:baselineAlignBottom="false" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/heritage_city"
+                android:layout_width="133dp"
+                android:layout_height="29dp"
+
+                android:layout_alignTop="@+id/layoutDate"
+                android:layout_alignEnd="@id/layoutDate"
+                android:layout_alignRight="@id/layoutDate"
+                android:layout_marginEnd="258dp"
+                android:layout_marginRight="258dp"
+                android:drawablePadding="10dp"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="Author"
+                android:textColor="@android:color/white" />
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>

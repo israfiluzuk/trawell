@@ -1,4 +1,4 @@
-package com.example.trawell;
+package com.example.trawell.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.trawell.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,34 +27,10 @@ public class KullaniciGiris extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_giris);
 
 
-        /*girisMail = findViewById(R.id.login_mail);
-        girisSifre = findViewById(R.id.login_password)
-        loginButton = findViewById(R.id.btnGirisYap);
-        loginProgress = findViewById(R.id.login_progress);
-        loginProgress.setVisibility(View.INVISIBLE);
-
-
-        if (firebaseAuth.getCurrentUser()!=null){
-            startActivity(new Intent(KullaniciGiris.this, MainActivity.class));
-            finish();
-        }
-
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginProgress.setVisibility(View.VISIBLE);
-                loginButton.setVisibility(View.INVISIBLE);
-            }
-        });*/
-
-        setContentView(R.layout.activity_giris);
         girisMail = (EditText) findViewById(R.id.login_mail);
         girisSifre = (EditText) findViewById(R.id.login_password);
         loginProgress = (ProgressBar) findViewById(R.id.login_progress);
@@ -61,9 +38,8 @@ public class KullaniciGiris extends AppCompatActivity {
         btnReset = (Button) findViewById(R.id.btnSifreUnuttum);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
         loginProgress.setVisibility(View.INVISIBLE);
-
-
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +64,9 @@ public class KullaniciGiris extends AppCompatActivity {
                 }
 
                 loginProgress.setVisibility(View.VISIBLE);
+                loginButton.setVisibility(View.INVISIBLE);
+                loginProgress.setVisibility(View.INVISIBLE);
+                loginButton.setVisibility(View.VISIBLE);
 
                 firebaseAuth.signInWithEmailAndPassword(email,password)
                         .addOnCompleteListener(KullaniciGiris.this, new OnCompleteListener<AuthResult>() {
@@ -102,6 +81,7 @@ public class KullaniciGiris extends AppCompatActivity {
                                         Toast.makeText(KullaniciGiris.this, getString(R.string.firebase_database_url),Toast.LENGTH_SHORT).show();
 
                                     }
+
                                 }
                                 else{
                                     Intent intent = new Intent(KullaniciGiris.this, Anasayfa.class);
@@ -113,6 +93,12 @@ public class KullaniciGiris extends AppCompatActivity {
             }
         });
 
+    }
+    public void open_password(View view){
+
+        finish();
+        Intent i  = new Intent(KullaniciGiris.this, SifreDegistirActivity.class);
+        startActivity(i);
     }
 
 }

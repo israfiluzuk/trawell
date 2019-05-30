@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_ayarlar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.AyarlarFragment"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/set_bildirim"
+        >
+    <android.support.v7.widget.SwitchCompat
+        android:textSize="15dp"
+        android:id="@+id/sw_bildirim"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="10dp"
+        android:text="Bildirimler" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/set_sifre_deg"
+        android:layout_height="50dp"
+        android:layout_below="@+id/set_bildirim">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Şifre Değiştir"
+            android:textSize="15dp"
+            android:textColor="#000"
+            android:layout_marginTop="10dp"
+            android:id="@+id/txt_sifre_deg"
+            android:paddingLeft="10dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/RL_sifre_deg"
+            android:gravity="end"
+            android:paddingRight="10dp"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            >
+
+            <Button
+                android:id="@+id/btn_sifre_deg"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="@drawable/background_button"
+                android:text="Değiştir"
+                android:textColor="@color/WhiteBAck" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/set_foto_deg"
+        android:layout_height="50dp"
+        android:layout_below="@+id/set_sifre_deg">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Hesabımı kalıcı olarak sil"
+            android:textSize="15dp"
+            android:textColor="#000"
+            android:layout_marginTop="10dp"
+            android:id="@+id/txt_foto_deg"
+            android:paddingLeft="10dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/RL_foto_deg"
+            android:gravity="end"
+            android:paddingRight="10dp"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            >
+
+            <Button
+                android:id="@+id/btn_hesap_sil"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="@drawable/background_button"
+                android:text="Hesabı Sil"
+                android:textColor="@color/WhiteBAck" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/set_foto_deg"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/hesapSilPB"
+            style="?android:attr/progressBarStyleHorizontal"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
